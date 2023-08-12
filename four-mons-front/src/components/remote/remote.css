@@ -1,0 +1,80 @@
+.remote {
+    height: 100%;
+    padding: 0 1em 1em;
+    box-sizing: border-box;
+    background-color: var(--light-gray);
+}
+
+.remote__display-wrapper {
+    display: inline-block;
+    line-height: 100%;
+    border-radius: 3px;
+    background-color: var(--lighty-gray);
+}
+
+.remote__display-wrapper:before {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    content: "";
+}
+
+.remote__display {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+.device-selector {
+    display: flex;
+}
+
+.device-selector__button {
+    margin: auto;
+}
+
+.remote-buttons {
+    display: grid;
+    grid-template-columns: 5em 4em 5em;
+    grid-template-rows: 5em 4em 5em;
+    grid-gap: 1em;
+    justify-content: center;
+}
+
+.remote-input__text {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: none;
+}
+
+.remote__list {
+    margin-top: 2em;
+}
+
+.remote__item {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.remote-input__button {
+    width:  50%;
+    height: 100%;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.remote__button {
+    border-radius: 3px;
+}
+
+.device-selector__button {
+    height: 4em;
+    width: 4em;
+    margin: auto;
+}

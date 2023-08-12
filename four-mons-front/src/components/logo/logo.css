@@ -1,0 +1,32 @@
+.logo {
+  min-width: 20px;
+}
+
+.logo__link {
+  display: block;
+}
+
+.logo__image {
+  margin: 0;
+  padding: 0;
+  will-change: filter;
+}
+
+.logo__image:hover {
+  filter: drop-shadow(0 0 2em var(--natural-black));
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo__image--animate {
+    animation: logo-spin infinite 20s linear;
+  }
+}

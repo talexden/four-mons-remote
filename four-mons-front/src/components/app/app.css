@@ -1,0 +1,24 @@
+#root {
+  display: grid;
+  grid-template-rows: 6em 1fr 2em;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  text-align: center;
+  background-color: var(--light-gray);
+
+  --natural-black: #444444;
+  --white: #ffffff;
+  --lighty-gray: #ebebeb;
+  --light-gray: #d9d9d9;
+  --deep-gray: #bdbdbd;
+}
+.button__submit {
+  height: 100%;
+  width: 100%;
+}
+
+.footer__button-display {
+  height: 100%;
+  width: 100%;
+}

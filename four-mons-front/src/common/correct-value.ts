@@ -1,0 +1,1 @@
+export const correctValue = (value: string): string => value;

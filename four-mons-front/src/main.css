@@ -1,0 +1,73 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+@media (min-height: 480px) {
+  :root {
+    height: 100%;
+  }
+}
+
+@media (min-width: 512px) {
+  :root {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    font-size: 35px;
+  }
+}
+
+
+a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+
+body {
+  margin: 0;
+  min-width: 320px;
+  height: 100%;
+  place-items: center;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  padding: 0;
+  border: none;
+  color: inherit;
+  background-color: var(--deep-gray);
+  cursor: pointer;
+  font-weight: 800;
+  font-size: inherit;
+  text-transform: capitalize;
+}
+
+button:active {
+  color: var(--white);
+  background-color: var(--natural-black);
+}
+
+*.unselectable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  /*
+    Introduced in Internet Explorer 10.
+    See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+  */
+  -ms-user-select: none;
+  user-select: none;
+}
