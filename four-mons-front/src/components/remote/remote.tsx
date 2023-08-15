@@ -1,52 +1,93 @@
 import './remote.css';
-import Button from '../button/button';
-import {CbType} from '../../types/types';
 import {btn} from '../../common/const';
+import Radio from '../radio/radio';
+import ButtonAction from '../button-action/button-action';
 
 type RemotePropsType = {
-  onClick: CbType;
+  onClick: (title: string, data: any)=> void,
+  device: string,
+  setDevice: (id: string) => void,
 }
 
 
-function Remote ({onClick}: RemotePropsType):JSX.Element {
+function Remote ({onClick, setDevice, device}: RemotePropsType):JSX.Element {
   return (
     <div className='remote'>
-      {/*<div className='remote__display-wrapper'>*/}
-      {/*  <span className='remote__display'>16000</span>*/}
-      {/*</div>*/}
-      {/*<div className='remote__display-wrapper'>*/}
-      {/*  <span className='remote__display'>Parking</span>*/}
-      {/*</div>*/}
-      <ul className='remote__list device-selector'>
-        <li className='remote__item device-selector__button'>
-          <Button btn={btn.set1} onClick={onClick}></Button>
+      <ul className='device device-selector'>
+        <li className='device__item'>
+          <Radio
+            id={'1'}
+            name={'device-radio'}
+            title={'1'}
+            onClick={setDevice}
+          />
         </li>
-        <li className='remote__item device-selector__button'>
-          <Button btn={btn.set2} onClick={onClick}></Button>
+        <li className='device__item'>
+          <Radio
+            id={'2'}
+            name={'device-radio'}
+            title={'2'}
+            onClick={setDevice}
+          />
         </li>
-        <li className='remote__item device-selector__button'>
-          <Button btn={btn.set3} onClick={onClick}></Button>
+        <li className='device__item'>
+          <Radio
+            id={'3'}
+            name={'device-radio'}
+            title={'3'}
+            onClick={setDevice}
+          />
         </li>
-        <li className='remote__item device-selector__button'>
-          <Button btn={btn.set4} onClick={onClick}></Button>
+        <li className='device__item'>
+          <Radio
+            id={'4'}
+            name={'device-radio'}
+            title={'4'}
+            onClick={setDevice}
+          />
         </li>
       </ul>
       <ul className='remote__list remote-buttons'>
         <li className='remote__item'></li>
         <li className='remote__item'>
-          <Button btn={btn.rew} onClick={onClick}></Button>
+          <ButtonAction
+            btn={btn.rew}
+            action={onClick}
+            device={device}
+            motor={'1'}
+            dir={'0'}
+
+          />
         </li>
         <li className='remote__item'></li>
         <li className='remote__item'>
-          <Button btn={btn.ccw} onClick={onClick}></Button>
+          <ButtonAction
+            btn={btn.ccw}
+            action={onClick}
+            device={device}
+            motor={'2'}
+            dir={'0'}
+          />
         </li>
         <li className='remote__item'></li>
         <li className='remote__item'>
-          <Button btn={btn.cw} onClick={onClick}></Button>
+          <ButtonAction
+            btn={btn.cw}
+            action={onClick}
+            device={device}
+            motor={'2'}
+            dir={'1'}
+          />
         </li>
         <li className='remote__item'></li>
         <li className='remote__item'>
-          <Button btn={btn.fwd} onClick={onClick}></Button>
+          <ButtonAction
+            btn={btn.fwd}
+            action={onClick}
+            device={device}
+            motor={'1'}
+            dir={'1'}
+          />
         </li>
         <li className='remote__item'></li>
       </ul>

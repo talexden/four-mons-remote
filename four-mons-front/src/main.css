@@ -71,3 +71,8 @@ button:active {
   -ms-user-select: none;
   user-select: none;
 }
+
+.visually-hidden {
+  position: fixed;
+  transform: scale(0);
+}

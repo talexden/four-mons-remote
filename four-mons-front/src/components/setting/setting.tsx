@@ -1,25 +1,25 @@
 import './setting.css';
 import Button from '../button/button';
 import {btn, SETTINGS} from '../../common/const';
-import Fieldset from '../setting-Input/setting-Input';
-import {CbSaveSettingType, CbType} from '../../types/types';
+import SettingInput from '../setting-Input/setting-Input';
 
 type SettingPropsType = {
-  onClick: CbType;
-  onChange: CbSaveSettingType;
+  resetSetting: () => void,
+  setSetting: (setting: any)=> void,
+  setFlour: (setting: any)=> void,
   setting: any;
 }
 
-function Setting ({onClick, setting, onChange}:SettingPropsType):JSX.Element {
+function Setting ({setting, setSetting, setFlour, resetSetting}:SettingPropsType):JSX.Element {
   return (
     <div className='setting main__setting'>
 
       {SETTINGS.map((settingType)=> (
-        <Fieldset key={settingType} settingType={settingType} setting={setting} onChange={onChange}/>
+        <SettingInput key={settingType} settingType={settingType} setting={setting} onChange={setSetting}/>
       ))}
 
-      <Button btn={btn.resetSetting} onClick={onClick}/>
-      <Button btn={btn.setFlour} onClick={onClick}/>
+      <Button btn={btn.resetSetting} action={resetSetting}/>
+      <Button btn={btn.setFlour} action={setFlour}/>
     </div>
   )
 }

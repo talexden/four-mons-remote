@@ -21,7 +21,7 @@ function SettingInput ({settingType, setting, onChange}: FieldsetPropsType):JSX.
   return (
     <>
       <label className="setting__input-label" htmlFor={settingType}>
-        <span className='setting__input-text'>{settingType}</span>
+        <span className='setting__input-text unselectable'>{settingType}</span>
       </label>
       <input className='setting__input' type='text' id={settingType} value={setting[settingType]} onChange={HandleOnChange}/>
     </>

@@ -31,9 +31,6 @@
     display: flex;
 }
 
-.device-selector__button {
-    margin: auto;
-}
 
 .remote-buttons {
     display: grid;
@@ -51,6 +48,18 @@
     border: none;
 }
 
+
+.device {
+    margin-top: 2em;
+}
+
+.device__item {
+    margin: auto;
+    width: 3em;
+    height: 3em;
+}
+
+
 .remote__list {
     margin-top: 2em;
 }
@@ -59,14 +68,6 @@
     display: block;
     width: 100%;
     height: 100%;
-}
-
-.remote-input__button {
-    width:  50%;
-    height: 100%;
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 .remote__button {

@@ -36,10 +36,13 @@ void loop() {
   if (parsing()) {
     switch (buffer[0]) {  // согласно коду команды
       case 0:   // тут можно читать данные из buffer согласно коду команды
-        stepper.stop();
+        // stepper.stop();
         break;
       case 1:   // тут можно читать данные из buffer согласно коду команды
-        stepper.resume();
+        if (buffer[1] == 2) {
+          stepper.stop();
+        }
+        // Serial.print(buffer[0]);
         break;
       case 2:   // тут можно читать данные из buffer согласно коду команды
         
@@ -51,15 +54,16 @@ void loop() {
 
 
 
-  // асинхронно вывожу в порт графики
-  static uint32_t tmr;
-  if (millis() - tmr >= 20) {
-    tmr = millis();
-    Serial.print(stepper.getTarget());
-    Serial.print(',');
-    Serial.println(stepper.pos);
-  }
+//   // асинхронно вывожу в порт графики
+//   static uint32_t tmr;
+//   if (millis() - tmr >= 20) {
+//     tmr = millis();
+//     Serial.print(stepper.getTarget());
+//     Serial.print(',');
+//     Serial.println(stepper.pos);
+//   }
 }
+
 
 
 // парсер. Возвращает количество принятых байтов даты

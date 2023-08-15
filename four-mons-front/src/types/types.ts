@@ -4,7 +4,7 @@ export type CbType = (title: string, command: string)=> void;
 export type CbSaveSettingType = (setting: any)=> void;
 
 
-export type ButtonType =  {className: string, title: string, command: Command};
+export type ButtonType =  {className: string, title: string, command: string};
 
 export type BntType = {
   [keys in Command]: ButtonType;

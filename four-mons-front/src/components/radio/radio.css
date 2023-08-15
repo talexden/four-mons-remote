@@ -1,0 +1,16 @@
+.radio__text {
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 3em;
+    background-color: var(--deep-gray);
+}
+
+.radio__text:hover {
+    cursor: pointer;
+}
+
+.radio__input:checked+.radio__text {
+    color: var(--white);
+    background-color: var(--natural-black);
+}

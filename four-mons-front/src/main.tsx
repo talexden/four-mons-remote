@@ -8,7 +8,3 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <App />
   </React.StrictMode>,
 )
-
-
-// @ts-ignore
-import('./eruda').then(({ default: eruda }) => {console.log(eruda)});

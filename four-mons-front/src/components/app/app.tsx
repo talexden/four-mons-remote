@@ -9,10 +9,30 @@ import {btn, Command} from '../../common/const';
 const hostname = window.location.hostname;
 const ws = new WebSocket(`ws://${hostname}:3300`);
 
-const sendMessage = (messageType: string, messageBody: any) => {
+const waitForConnection = function (callback: any, interval: number) {
+  if (ws.readyState === 1) {
+    callback();
+  } else {
+    // optional: implement backoff for interval here
+    setTimeout(function () {
+      waitForConnection(callback, interval);
+    }, interval);
+  }
+};
+
+
+const sendWsCommand = (messageType: string, messageBody: any = {}, callback: any) => {
   console.log(JSON.stringify({type: messageType, body: messageBody}));
   ws.send(JSON.stringify({type: messageType, body: messageBody}));
+  if (typeof callback !== 'undefined') {
+    callback();
+  }
 };
+
+const sendMessage = (messageType: string, messageBody: any, callback?: any) => {
+  waitForConnection(()=>sendWsCommand(messageType, messageBody, callback), 1000);
+};
+
 
 const SETTING_STATE_INIT = {
   "group": "",
@@ -35,8 +55,9 @@ function App() {
   const [currentPage, setCurrentPage] = useState(String(btn.remote.title));
   const [currentCommand, setCurrentCommand] = useState('');
   const [wsStatus, setWsStatus] = useState('Offline');
-  const [setting, setSetting] = useState(SETTING_STATE_INIT)
-  const [position, setPosition] = useState('')
+  const [setting, setSetting] = useState(SETTING_STATE_INIT);
+  const [device, setDevice] = useState('')
+
   ws.onopen = () => setWsStatus('Online');
   ws.onclose = () => setWsStatus('Disconnect');
   ws.onmessage = (response) => {
@@ -47,9 +68,6 @@ function App() {
       case Command.ResetSetting:
         setSetting(message.body);
         break;
-      case  'position':
-        setPosition(message.body);
-        break
       default:
         console.log('что за комманда?')
         break;
@@ -57,43 +75,55 @@ function App() {
     }
   };
 
-  const HandleOnChangePage = (command: string, title: string, ) => {
+  const HandleOnChangePage = (title: string) => {
     setCurrentPage(title);
-    setCurrentCommand(command);
   }
 
   useEffect(()=>{
-    if (currentCommand !== '') {
-      switch (currentCommand) {
-        case '':
-          break;
-        case btn.saveSetting.command:
-          sendMessage(currentCommand, setting);
-          break;
-        default:
-          sendMessage(currentCommand, currentCommand);
-          break;
-      }
-      setCurrentCommand('');
-    }
-
-
+    sendMessage(Command.ResetSetting, setting);
   },[currentCommand] )
+
+  const HandleSendCommand = (title: string, data: any) => {
+    sendMessage(title, data);
+  };
+
+  const HandleSaveSettings = () => {
+    sendMessage(Command.SaveSetting, setting);
+  };
+
+  const HandleResetSettings = () => {
+    sendMessage(Command.ResetSetting, setting);
+  };
+
+
 
   return (
       <>
         <Header page={currentPage} onClick={HandleOnChangePage} wsStatus={wsStatus}/>
         <main className="main">
           {currentPage === btn.loadSetting.title &&
-            <Setting setting={setting} onClick={setCurrentCommand} onChange={setSetting}/>}
+            <Setting
+              setting={setting}
+              setFlour={setCurrentCommand}
+              resetSetting={HandleResetSettings}
+              setSetting={setSetting}/>}
           {currentPage === btn.remote.title &&
-            <Remote onClick={setCurrentCommand}/>}
+            <Remote
+              onClick={HandleSendCommand}
+              device={device}
+              setDevice={setDevice}
+            />}
         </main>
         <footer className='footer'>
           {currentPage === btn.loadSetting.title &&
-            <Button btn={btn.saveSetting} onClick={setCurrentCommand}/>}
+            <Button
+              btn={btn.saveSetting}
+              action={HandleSaveSettings}
+            />}
           {currentPage === btn.remote.title &&
-            <Button btn={btn.footerDisplay} onClick={()=>{}}/>}
+            <Button
+              btn={btn.footerDisplay}
+              action={()=>{}}/>}
         </footer>
       </>
   )
