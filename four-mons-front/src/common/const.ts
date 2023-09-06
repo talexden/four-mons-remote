@@ -55,4 +55,3 @@ export const btn: Readonly<BntType> = {
 };
 
 export const REPEAT_COMMAND_TIME = 100;
-export const ARDUINO_COMMAND = 'arduinoCommand'
